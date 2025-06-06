@@ -1,0 +1,983 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MemoDev | Creative Developer Portfolio</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --magenta: #ff00ff;
+            --pink: #ff1493;
+            --black: #121212;
+            --dark: #1a1a1a;
+            --darker: #0f0f0f;
+            --light: #f8f8f8;
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', 'Segoe UI', sans-serif;
+        }
+        
+        body {
+            background-color: var(--black);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+            scroll-behavior: smooth;
+        }
+        
+        ::selection {
+            background: var(--magenta);
+            color: white;
+        }
+        
+        header {
+            background: linear-gradient(135deg, var(--magenta), var(--pink));
+            color: white;
+            padding: 8rem 0 12rem;
+            text-align: center;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: -3rem;
+            position: relative;
+        }
+        
+        header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 100px;
+            background: linear-gradient(to bottom, rgba(18, 18, 18, 0), var(--black));
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        h1 {
+            font-size: 4.5rem;
+            margin-bottom: 1.5rem;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
+            font-weight: 800;
+            line-height: 1.1;
+        }
+        
+        h2 {
+            font-size: 2.8rem;
+            margin: 3rem 0 1.5rem;
+            background: linear-gradient(to right, var(--magenta), var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            display: inline-block;
+            position: relative;
+        }
+        
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 70%;
+            height: 4px;
+            background: linear-gradient(to right, var(--magenta), var(--pink));
+            border-radius: 2px;
+        }
+        
+        h3 {
+            font-size: 1.5rem;
+            color: var(--magenta);
+            margin-bottom: 0.5rem;
+        }
+        
+        .tagline {
+            font-size: 1.5rem;
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+        
+        .subtitle {
+            font-size: 1.1rem;
+            color: rgba(255,255,255,0.7);
+            max-width: 600px;
+            margin: 0 auto 2rem;
+        }
+        
+        nav {
+            background-color: var(--darker);
+            box-shadow: 0 5px 30px rgba(255, 20, 147, 0.2);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            background-color: rgba(10, 10, 10, 0.9);
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .nav-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+        
+        nav ul {
+            display: flex;
+            justify-content: space-between;
+            list-style: none;
+            padding: 1.2rem 0;
+        }
+        
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 0.5rem 0;
+            font-weight: 500;
+            transition: var(--transition);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            font-size: 0.85rem;
+            position: relative;
+            border-bottom: 2px solid transparent;
+        }
+        
+        nav a:hover {
+            color: var(--magenta);
+            border-bottom-color: var(--magenta);
+        }
+        
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--magenta);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover::after {
+            width: 100%;
+        }
+        
+        section {
+            padding: 6rem 0;
+            position: relative;
+        }
+        
+        section:nth-child(even) {
+            background-color: var(--darker);
+        }
+        
+        .about {
+            background-color: var(--black);
+            position: relative;
+        }
+        
+        .specialties {
+            display: flex;
+            gap: 2rem;
+            margin: 3rem 0;
+            flex-wrap: wrap;
+        }
+        
+        .specialty {
+            background: var(--dark);
+            padding: 2rem;
+            border-radius: 12px;
+            flex: 1;
+            min-width: 250px;
+            transition: var(--transition);
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.05);
+        }
+        
+        .specialty::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 4px;
+            height: 100%;
+            background: linear-gradient(to bottom, var(--magenta), var(--pink));
+        }
+        
+        .specialty:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.2);
+        }
+        
+        .specialty i {
+            font-size: 2.5rem;
+            color: var(--pink);
+            margin-bottom: 1.5rem;
+            background: linear-gradient(to right, var(--magenta), var(--pink));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        
+        .projects {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+        
+        .project {
+            background: var(--dark);
+            border-radius: 16px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+        
+        .project::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,0,255,0.1), rgba(255,20,147,0.1));
+            opacity: 0;
+            transition: var(--transition);
+        }
+        
+        .project:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
+            border-color: rgba(255, 20, 147, 0.3);
+        }
+        
+        .project:hover::before {
+            opacity: 1;
+        }
+        
+        .project img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            display: block;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .project-info {
+            padding: 2rem;
+        }
+        
+        .project-info h3 {
+            margin-bottom: 1rem;
+        }
+        
+        .project-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+        
+        .tag {
+            background: rgba(255, 20, 147, 0.1);
+            color: var(--pink);
+            padding: 0.3rem 0.8rem;
+            border-radius: 50px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+        
+        .contact {
+            text-align: center;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            background: linear-gradient(135deg, var(--magenta), var(--pink));
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            margin: 1rem 0.5rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.3);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
+            transform: translateX(-100%);
+            transition: 0.6s;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px) scale(1.03);
+            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
+        }
+        
+        .btn:hover::after {
+            transform: translateX(100%);
+        }
+        
+        .btn i {
+            margin-right: 0.8rem;
+            font-size: 1.2rem;
+        }
+        
+        .btn-outline {
+            background: transparent;
+            border: 2px solid var(--magenta);
+            color: var(--magenta);
+            box-shadow: none;
+        }
+        
+        .btn-outline:hover {
+            background: linear-gradient(135deg, var(--magenta), var(--pink));
+            color: white;
+        }
+        
+        footer {
+            background-color: var(--darker);
+            text-align: center;
+            padding: 4rem 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .social-links a {
+            color: var(--light);
+            font-size: 1.5rem;
+            transition: var(--transition);
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: var(--dark);
+        }
+        
+        .social-links a:hover {
+            color: var(--magenta);
+            transform: translateY(-5px);
+            background: rgba(255, 20, 147, 0.1);
+        }
+        
+        .humor {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.5);
+            margin-top: 3rem;
+            font-style: italic;
+        }
+        
+        .games-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+        
+        .game-card {
+            background: var(--dark);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+        
+        .game-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.2);
+        }
+        
+        .game-image {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        
+        .game-info {
+            padding: 1.5rem;
+        }
+        
+        .game-title {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--light);
+        }
+        
+        .game-description {
+            font-size: 0.9rem;
+            color: rgba(255,255,255,0.7);
+            margin-bottom: 1rem;
+        }
+        
+        .game-link {
+            display: inline-block;
+            color: var(--magenta);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: var(--transition);
+        }
+        
+        .game-link:hover {
+            color: var(--pink);
+            text-decoration: underline;
+        }
+
+        /* Suggestion Box Styles */
+        .suggestion-section {
+            background-color: var(--darker);
+            text-align: center;
+        }
+
+        .suggestion-box {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin: 0 auto;
+            max-width: 600px;
+        }
+
+        .suggestion-box textarea {
+            width: 100%;
+            height: 150px;
+            padding: 15px;
+            border: 2px solid rgba(255,255,255,0.1);
+            border-radius: 8px;
+            resize: none;
+            font-size: 16px;
+            transition: var(--transition);
+            background-color: var(--dark);
+            color: var(--light);
+        }
+
+        .suggestion-box textarea:focus {
+            outline: none;
+            border-color: var(--magenta);
+            box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
+        }
+
+        .suggestion-box button {
+            background: linear-gradient(135deg, var(--magenta), var(--pink));
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+            transition: var(--transition);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .suggestion-box button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 8px rgba(255, 20, 147, 0.4);
+        }
+
+        .suggestion-box button:active {
+            transform: translateY(1px);
+        }
+
+        .suggestion-box button:disabled {
+            background: #cccccc;
+            cursor: not-allowed;
+            transform: none;
+            box-shadow: none;
+        }
+
+        .trash-container {
+            height: 140px;
+            position: relative;
+            margin-bottom: 20px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: var(--transition);
+        }
+
+        .trash-container.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .trash-bin {
+            position: relative;
+            width: 100px;
+            height: 120px;
+            margin: 0 auto;
+        }
+
+        .bin-body {
+            width: 100px;
+            height: 80px;
+            background-color: #666;
+            border-radius: 0 0 5px 5px;
+            position: relative;
+            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
+        }
+
+        .bin-lid {
+            width: 110px;
+            height: 15px;
+            background-color: #888;
+            border-radius: 5px 5px 0 0;
+            position: absolute;
+            top: -15px;
+            left: -5px;
+            transition: transform 0.3s;
+            transform-origin: left center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+        }
+
+        .bin-lid-open {
+            transform: rotate(-30deg);
+        }
+
+        .particle {
+            position: absolute;
+            color: var(--magenta);
+            pointer-events: none;
+            z-index: 10;
+            transform: translate(-50%, -50%);
+            font-weight: bold;
+            transition: all 0.1s;
+        }
+
+        .feedback-message {
+            margin-top: 20px;
+            font-size: 18px;
+            font-weight: bold;
+            height: 24px;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: var(--transition);
+        }
+
+        .feedback-message.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .success {
+            color: var(--magenta);
+        }
+
+        .error {
+            color: #f44336;
+        }
+
+        .character-count {
+            text-align: right;
+            font-size: 14px;
+            color: rgba(255,255,255,0.7);
+            margin-top: 5px;
+        }
+
+        .character-count.warning {
+            color: #ff9800;
+        }
+
+        .character-count.error {
+            color: #f44336;
+        }
+        
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 3rem;
+            }
+            
+            h2 {
+                font-size: 2.2rem;
+            }
+            
+            .tagline {
+                font-size: 1.2rem;
+            }
+            
+            nav ul {
+                flex-wrap: wrap;
+                gap: 1rem;
+                justify-content: center;
+            }
+            
+            nav a {
+                padding: 0.5rem 1rem;
+                font-size: 0.8rem;
+            }
+            
+            .projects, .games-container {
+                grid-template-columns: 1fr;
+            }
+            
+            section {
+                padding: 4rem 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <h1>MEMODEV</h1>
+            <p class="tagline">Transforming ideas into stunning digital experiences</p>
+            <p class="subtitle">Developer by day, creative problem-solver by night. I make pixels do things they didn't know they could do.</p>
+        </div>
+    </header>
+    
+    <nav>
+        <div class="nav-container">
+            <ul>
+                <li><a href="#about">About</a></li>
+                <li><a href="#work">Portfolio</a></li>
+                <li><a href="#games">Games</a></li>
+                <li><a href="#suggestions">Suggestions</a></li>
+                <li><a href="#contact">Connect</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <section id="about" class="about">
+        <div class="container">
+            <h2>Creative Developer</h2>
+            <p>I'm MemoDev, a passionate creator specializing in bringing visions to life through technical execution and artistic flair. My work sits at the intersection of functionality and aesthetics.</p>
+            
+            <div class="specialties">
+                <div class="specialty">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Brainstorming</h3>
+                    <p>Concept development and creative problem-solving to generate innovative solutions that stand out. I turn coffee into code and ideas into reality.</p>
+                </div>
+                
+                <div class="specialty">
+                    <i class="fas fa-code"></i>
+                    <h3>Scripting</h3>
+                    <p>Clean, efficient code that brings functionality to your projects with precision and reliability. I speak fluent JavaScript, Python, and occasionally sarcasm.</p>
+                </div>
+                
+                <div class="specialty">
+                    <i class="fas fa-film"></i>
+                    <h3>VFX</h3>
+                    <p>Stunning visual effects that enhance storytelling and create immersive digital experiences. Because sometimes reality needs a little extra sparkle.</p>
+                </div>
+            </div>
+            
+            <p class="humor">* May contain traces of humor. Side effects may include increased creativity, spontaneous idea generation, and the occasional bad pun.</p>
+        </div>
+    </section>
+    
+    <section id="work" class="work">
+        <div class="container">
+            <h2>Featured Projects</h2>
+            <p>Here's some of my recent work that I'm particularly proud of (and that didn't break in production).</p>
+            
+            <div class="projects">
+                <div class="project">
+                    <img src="https://media.discordapp.net/attachments/1361617965694582897/1362112236235259996/image.png?ex=6833f71f&is=6832a59f&hm=243b797ba941ab597717c3721c0fe1a2f356ec1ec48e306c7007d8ff53f5601a&=&format=webp&quality=lossless&width=1591&height=800" alt="Creative Project">
+                    <div class="project-info">
+                        <h3>Immersive Experience</h3>
+                        <p>A cutting-edge interactive project combining scripting and visual effects to create a memorable user journey. Because who doesn't love a good digital rabbit hole?</p>
+                        <div class="project-tags">
+                            <span class="tag">Interactive</span>
+                            <span class="tag">VFX</span>
+                            <span class="tag">WebGL</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <img src="https://media.discordapp.net/attachments/1361617965694582897/1364728037752573983/image.png?ex=683440c7&is=6832ef47&hm=a8e414a070daa26a257693842596d8f340a0dd9254e4e4ca1656e87b4925965a&=&format=webp&quality=lossless&width=1558&height=800" alt="VFX Showcase">
+                    <div class="project-info">
+                        <h3>Visual Effects Demo</h3>
+                        <p>A collection of stunning VFX work demonstrating technical skill and creative vision. Warning: May cause excessive "ooh" and "aah" reactions.</p>
+                        <div class="project-tags">
+                            <span class="tag">VFX</span>
+                            <span class="tag">Animation</span>
+                            <span class="tag">Shaders</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="project">
+                    <img src="https://media.discordapp.net/attachments/1361617965694582897/1373695615657181235/image.png?ex=6833eafc&is=6832997c&hm=e9ffd3281ce00a3549465f284243f944db5e634b53c55946032207274cc782c2&=&format=webp&quality=lossless&width=1605&height=604" alt="Scripting Project">
+                    <div class="project-info">
+                        <h3>Scripting Solution</h3>
+                        <p>An elegant technical implementation solving complex problems through clean, efficient code. It works, I promise (most of the time).</p>
+                        <div class="project-tags">
+                            <span class="tag">JavaScript</span>
+                            <span class="tag">Automation</span>
+                            <span class="tag">API</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <section id="games" class="games">
+        <div class="container">
+            <h2>Game Development</h2>
+            <p>When I'm not doing client work, I create games that are (hopefully) more fun than debugging CSS.</p>
+            
+            <div class="games-container">
+                <div class="game-card">
+                    <img src="https://img.itch.zone/aW1hZ2UvMjE1ODM0NS8xMjY3NzY1MS5wbmc=/original/%2FQJ9a%2F.png" class="game-image" alt="Game Screenshot">
+                    <div class="game-info">
+                        <h3 class="game-title">Project Neon</h3>
+                        <p class="game-description">A fast-paced arcade shooter with retro aesthetics and modern mechanics. Warning: May cause addiction.</p>
+                        <a href="https://memo-dev.itch.io/project-neon" class="game-link" target="_blank">Play on itch.io →</a>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://img.itch.zone/aW1hZ2UvMjE1ODM0NS8xMjY3NzY1Mi5wbmc=/original/7%2F%2Fk3w.png" class="game-image" alt="Game Screenshot">
+                    <div class="game-info">
+                        <h3 class="game-title">Pixel Quest</h3>
+                        <p class="game-description">An adventure RPG with charming pixel art and a story that doesn't take itself too seriously.</p>
+                        <a href="https://memo-dev.itch.io/pixel-quest" class="game-link" target="_blank">Play on itch.io →</a>
+                    </div>
+                </div>
+                
+                <div class="game-card">
+                    <img src="https://img.itch.zone/aW1hZ2UvMjE1ODM0NS8xMjY3NzY1My5wbmc=/original/4V%2F%2F%2Fj.png" class="game-image" alt="Game Screenshot">
+                    <div class="game-info">
+                        <h3 class="game-title">Cosmic Drift</h3>
+                        <p class="game-description">A relaxing space exploration game where the journey matters more than the destination.</p>
+                        <a href="https://memo-dev.itch.io/cosmic-drift" class="game-link" target="_blank">Play on itch.io →</a>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 3rem;">
+                <a href="https://memo-dev.itch.io" class="btn btn-outline" target="_blank">
+                    <i class="fas fa-gamepad"></i> View All Games
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="suggestions" class="suggestion-section">
+        <div class="container">
+            <h2>Got Suggestions?</h2>
+            <p>I'd love to hear your ideas for improvements or new features!</p>
+            
+            <div class="suggestion-box">
+                <textarea id="suggestionText" placeholder="Type your suggestion here..." maxlength="500"></textarea>
+                <div id="characterCount" class="character-count">0/500</div>
+                <button id="submitBtn">Submit Suggestion</button>
+            </div>
+            
+            <div class="trash-container" id="trashContainer">
+                <div class="trash-bin">
+                    <div class="bin-lid" id="binLid"></div>
+                    <div class="bin-body"></div>
+                </div>
+            </div>
+            
+            <div class="feedback-message" id="feedbackMessage"></div>
+            
+            <p class="humor">Note: Suggestions are stored in a magical database that may or may not exist.</p>
+        </div>
+    </section>
+    
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2>Let's Create Together</h2>
+            <p>Have a project in mind or want to discuss potential collaborations?</p>
+            <p>I'm always up for a creative challenge (and the occasional meme exchange).</p>
+            
+            <a href="https://discord.com/users/yourdiscordid" class="btn" target="_blank">
+                <i class="fab fa-discord"></i> memorysilver
+            </a>
+            
+            <p class="humor" style="margin-top: 3rem;">Disclaimer: I respond faster than most APIs, but slightly slower than a cached response.</p>
+        </div>
+    </section>
+    
+    <footer>
+        <div class="container">
+            <div class="social-links">
+                <a href="#" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
+                <a href="https://memo-dev.itch.io" target="_blank" title="itch.io"><i class="fas fa-gamepad"></i></a>
+            </div>
+            <p>&copy; 2023 MemoDev. All creativity reserved. No developers were harmed in the making of this portfolio.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const textarea = document.getElementById('suggestionText');
+            const submitBtn = document.getElementById('submitBtn');
+            const binLid = document.getElementById('binLid');
+            const trashContainer = document.getElementById('trashContainer');
+            const feedbackMessage = document.getElementById('feedbackMessage');
+            const characterCount = document.getElementById('characterCount');
+
+            // Character count feedback
+            textarea.addEventListener('input', function() {
+                const count = textarea.value.length;
+                characterCount.textContent = `${count}/500`;
+                if (count > 400) {
+                    characterCount.className = 'character-count warning';
+                } else if (count >= 500) {
+                    characterCount.className = 'character-count error';
+                } else {
+                    characterCount.className = 'character-count';
+                }
+            });
+
+            submitBtn.addEventListener('click', function() {
+                const text = textarea.value.trim();
+                if (!text) {
+                    showFeedback('Please enter your suggestion before submitting.', 'error');
+                    textarea.focus();
+                    return;
+                }
+                if (text.length > 500) {
+                    showFeedback('Please keep suggestions under 500 characters.', 'error');
+                    return;
+                }
+                submitBtn.disabled = true;
+                showTrashBin();
+                dissolveText(text);
+                textarea.value = '';
+                characterCount.textContent = '0/500';
+                characterCount.className = 'character-count';
+            });
+
+            function showTrashBin() {
+                trashContainer.classList.add('visible');
+            }
+
+            function showFeedback(message, type) {
+                feedbackMessage.textContent = message;
+                feedbackMessage.className = `feedback-message ${type} visible`;
+                setTimeout(() => {
+                    feedbackMessage.classList.remove('visible');
+                }, 3000);
+            }
+
+            function dissolveText(text) {
+                // Open the trash bin lid
+                binLid.classList.add('bin-lid-open');
+
+                // Create particles for each character
+                const textLength = text.length;
+                let particlesCompleted = 0;
+
+                for (let i = 0; i < textLength; i++) {
+                    setTimeout(() => {
+                        const particle = document.createElement('div');
+                        particle.className = 'particle';
+                        particle.textContent = text[i];
+                        particle.style.fontSize = `${14 + Math.random() * 6}px`;
+
+                        // Random color variation
+                        const hue = 300 + Math.random() * 60; // Magenta/pink hues
+                        particle.style.color = `hsl(${hue}, 70%, 70%)`;
+
+                        // Position at random location in textarea
+                        const textareaRect = textarea.getBoundingClientRect();
+                        const x = textareaRect.left + Math.random() * textareaRect.width;
+                        const y = textareaRect.top + Math.random() * textareaRect.height;
+                        particle.style.left = x + 'px';
+                        particle.style.top = y + 'px';
+                        document.body.appendChild(particle);
+
+                        // Animate to trash bin
+                        const binRect = binLid.getBoundingClientRect();
+                        const targetX = binRect.left + binRect.width/2;
+                        const targetY = binRect.top + binRect.height/2;
+                        const duration = 600 + Math.random() * 600;
+                        const startTime = Date.now();
+
+                        function animate() {
+                            const elapsed = Date.now() - startTime;
+                            const progress = Math.min(elapsed / duration, 1);
+
+                            // Arc motion with slight variation
+                            const arcHeight = 80 + Math.random() * 60;
+                            const arcVariation = Math.sin(progress * Math.PI * 2) * 30;
+                            const newX = x + (targetX - x) * progress + arcVariation;
+                            const newY = y + (targetY - y) * progress - arcHeight * Math.sin(progress * Math.PI);
+
+                            particle.style.left = newX + 'px';
+                            particle.style.top = newY + 'px';
+
+                            // Rotation effect
+                            particle.style.transform = `translate(-50%, -50%) rotate(${progress * 720}deg) scale(${1.2 - progress * 0.7})`;
+
+                            // Fade out
+                            particle.style.opacity = 1 - progress * 0.9;
+
+                            if (progress < 1) {
+                                requestAnimationFrame(animate);
+                            } else {
+                                particle.remove();
+                                particlesCompleted++;
+
+                                // When all particles are done
+                                if (particlesCompleted === textLength) {
+                                    completeAnimation();
+                                }
+                            }
+                        }
+
+                        requestAnimationFrame(animate);
+                    }, i * 30); // Stagger the particles
+                }
+
+                function completeAnimation() {
+                    showFeedback('Thank you for your suggestion!', 'success');
+
+                    // Close the lid after a delay
+                    setTimeout(() => {
+                        binLid.classList.remove('bin-lid-open');
+
+                        // Hide the bin after animation completes
+                        setTimeout(() => {
+                            trashContainer.classList.remove('visible');
+                            submitBtn.disabled = false;
+                        }, 1000);
+                    }, 500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
