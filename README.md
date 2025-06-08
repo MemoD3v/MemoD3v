@@ -2,7 +2,7 @@
 
 <img src="https://github.com/MemoD3v/MemoD3v/blob/main/full-resolution-pixelated.png" alt="banner" width="100%">
 
-I'm yet another game developer ⭐<br><br>🔭 I’m currently working on "Lightbreak"<br>🌱 I’m currently learning Lua Löve2D and C# Unity<br>👨‍💻 All of my projects are available at https://memo-dev.itch.io<br>📫 "memorysilver" on Discord, DMs are open!<br>⚡ Fun fact i failed 8th grade math!
+I'm yet another game developer ⭐<br><br>🔭 I’m currently working on "Lightbreak"<br>🌱 I’m currently learning Lua Löve2D and C# Unity<br>👨‍💻 All of my projects are available at https://memo-dev.itch.io<br>📫 "memorysilver" on Discord, DMs are open!<br>⚡ Fun fact; i failed 8th grade math!
 
 
 # 💻 Tech Stack:
