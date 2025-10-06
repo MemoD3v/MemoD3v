@@ -10,3 +10,12 @@
 {"Season 1"
   ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
 }
+{"Season 2"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
+{"Season 3"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
+{"Season 4"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
