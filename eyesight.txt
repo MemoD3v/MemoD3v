@@ -5,3 +5,8 @@
   ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
   ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
 }
+
+["Demon Slayer", "https://d2cbe6qj96hbor.cloudfront.net/puzzles/87PQC1PC4DJDGIKP.jpg"]
+{"Season 1"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
