@@ -1,0 +1,29 @@
+["Demo Animae", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo8PETsecQZr59D_uGdmH6DOKw2Yf7XxluJQ&s"]
+{"Season 1"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 2 - Advance of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
+
+["Anime 2", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRo8PETsecQZr59D_uGdmH6DOKw2Yf7XxluJQ&s"]
+{"Season 1"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 2 - Advance of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 2 - Advance of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
+{"Season 2"
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 2 - Advance of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 1 - Dawn of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 2 - Advance of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 3 - Something of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+  ("Episode 4 - Dusk of Azime", "http://vidmoly.net/embed-0vxa8w0bev9c.html")
+}
