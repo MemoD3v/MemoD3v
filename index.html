@@ -1,998 +1,1342 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MemoDev</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <style>
-        :root {
-            --magenta: #ff00ff;
-            --pink: #ff1493;
-            --black: #121212;
-            --dark: #1a1a1a;
-            --darker: #0f0f0f;
-            --light: #f8f8f8;
-            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Poppins', 'Segoe UI', sans-serif;
-        }
-        
-        body {
-            background-color: var(--black);
-            color: var(--light);
-            line-height: 1.7;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        ::selection {
-            background: var(--magenta);
-            color: white;
-        }
-        
-        header {
-            background: linear-gradient(135deg, var(--magenta), var(--pink));
-            color: white;
-            padding: 8rem 0 12rem;
-            text-align: center;
-            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
-            margin-bottom: -3rem;
-            position: relative;
-        }
-        
-        header::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            width: 100%;
-            height: 100px;
-            background: linear-gradient(to bottom, rgba(18, 18, 18, 0), var(--black));
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        h1 {
-            font-size: 4.5rem;
-            margin-bottom: 1.5rem;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.3);
-            font-weight: 800;
-            line-height: 1.1;
-        }
-        
-        h2 {
-            font-size: 2.8rem;
-            margin: 3rem 0 1.5rem;
-            background: linear-gradient(to right, var(--magenta), var(--pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            display: inline-block;
-            position: relative;
-        }
-        
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 0;
-            width: 70%;
-            height: 4px;
-            background: linear-gradient(to right, var(--magenta), var(--pink));
-            border-radius: 2px;
-        }
-        
-        h3 {
-            font-size: 1.5rem;
-            color: var(--magenta);
-            margin-bottom: 0.5rem;
-        }
-        
-        .tagline {
-            font-size: 1.5rem;
-            opacity: 0.9;
-            max-width: 700px;
-            margin: 0 auto;
-            font-weight: 300;
-        }
-        
-        .subtitle {
-            font-size: 1.1rem;
-            color: rgba(255,255,255,0.7);
-            max-width: 600px;
-            margin: 0 auto 2rem;
-        }
-        
-        nav {
-            background-color: var(--darker);
-            box-shadow: 0 5px 30px rgba(255, 20, 147, 0.2);
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            backdrop-filter: blur(10px);
-            background-color: rgba(10, 10, 10, 0.9);
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .nav-container {
-            max-width: 800px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-        
-        nav ul {
-            display: flex;
-            justify-content: space-between;
-            list-style: none;
-            padding: 1.2rem 0;
-        }
-        
-        nav a {
-            color: var(--light);
-            text-decoration: none;
-            padding: 0.5rem 0;
-            font-weight: 500;
-            transition: var(--transition);
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            font-size: 0.85rem;
-            position: relative;
-            border-bottom: 2px solid transparent;
-        }
-        
-        nav a:hover {
-            color: var(--magenta);
-            border-bottom-color: var(--magenta);
-        }
-        
-        nav a::after {
-            content: '';
-            position: absolute;
-            bottom: -2px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--magenta);
-            transition: width 0.3s ease;
-        }
-        
-        nav a:hover::after {
-            width: 100%;
-        }
-        
-        section {
-            padding: 6rem 0;
-            position: relative;
-        }
-        
-        section:nth-child(even) {
-            background-color: var(--darker);
-        }
-        
-        .about {
-            background-color: var(--black);
-            position: relative;
-        }
-        
-        .specialties {
-            display: flex;
-            gap: 2rem;
-            margin: 3rem 0;
-            flex-wrap: wrap;
-        }
-        
-        .specialty {
-            background: var(--dark);
-            padding: 2rem;
-            border-radius: 12px;
-            flex: 1;
-            min-width: 250px;
-            transition: var(--transition);
-            position: relative;
-            overflow: hidden;
-            border: 1px solid rgba(255,255,255,0.05);
-        }
-        
-        .specialty::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 4px;
-            height: 100%;
-            background: linear-gradient(to bottom, var(--magenta), var(--pink));
-        }
-        
-        .specialty:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 30px rgba(255, 20, 147, 0.2);
-        }
-        
-        .specialty i {
-            font-size: 2.5rem;
-            color: var(--pink);
-            margin-bottom: 1.5rem;
-            background: linear-gradient(to right, var(--magenta), var(--pink));
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-        }
-        
-        .projects {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-            margin-top: 3rem;
-        }
-        
-        .project {
-            background: var(--dark);
-            border-radius: 16px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            position: relative;
-        }
-        
-        .project::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,0,255,0.1), rgba(255,20,147,0.1));
-            opacity: 0;
-            transition: var(--transition);
-        }
-        
-        .project:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 15px 40px rgba(255, 20, 147, 0.3);
-            border-color: rgba(255, 20, 147, 0.3);
-        }
-        
-        .project:hover::before {
-            opacity: 1;
-        }
-        
-        .project img {
-            width: 100%;
-            height: 220px;
-            object-fit: cover;
-            display: block;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .project-info {
-            padding: 2rem;
-        }
-        
-        .project-info h3 {
-            margin-bottom: 1rem;
-        }
-        
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-top: 1rem;
-        }
-        
-        .tag {
-            background: rgba(255, 20, 147, 0.1);
-            color: var(--pink);
-            padding: 0.3rem 0.8rem;
-            border-radius: 50px;
-            font-size: 0.7rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-        }
-        
-        .contact {
-            text-align: center;
-        }
-        
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            background: linear-gradient(135deg, var(--magenta), var(--pink));
-            color: white;
-            padding: 1rem 2rem;
-            border-radius: 50px;
-            text-decoration: none;
-            font-weight: 600;
-            margin: 1rem 0.5rem;
-            transition: var(--transition);
-            box-shadow: 0 5px 20px rgba(255, 20, 147, 0.3);
-            border: none;
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .btn::after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, rgba(255,255,255,0.2), transparent);
-            transform: translateX(-100%);
-            transition: 0.6s;
-        }
-        
-        .btn:hover {
-            transform: translateY(-3px) scale(1.03);
-            box-shadow: 0 8px 25px rgba(255, 20, 147, 0.4);
-        }
-        
-        .btn:hover::after {
-            transform: translateX(100%);
-        }
-        
-        .btn i {
-            margin-right: 0.8rem;
-            font-size: 1.2rem;
-        }
-        
-        .btn-outline {
-            background: transparent;
-            border: 2px solid var(--magenta);
-            color: var(--magenta);
-            box-shadow: none;
-        }
-        
-        .btn-outline:hover {
-            background: linear-gradient(135deg, var(--magenta), var(--pink));
-            color: white;
-        }
-        
-        footer {
-            background-color: var(--darker);
-            text-align: center;
-            padding: 4rem 0;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .social-links {
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-            margin: 2rem 0;
-        }
-        
-        .social-links a {
-            color: var(--light);
-            font-size: 1.5rem;
-            transition: var(--transition);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            border-radius: 50%;
-            background: var(--dark);
-        }
-        
-        .social-links a:hover {
-            color: var(--magenta);
-            transform: translateY(-5px);
-            background: rgba(255, 20, 147, 0.1);
-        }
-        
-        .humor {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.5);
-            margin-top: 3rem;
-            font-style: italic;
-        }
-        
-        .games-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-        
-        .game-card {
-            background: var(--dark);
-            border-radius: 12px;
-            overflow: hidden;
-            transition: var(--transition);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-        }
-        
-        .game-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.2);
-        }
-        
-        .game-image {
-            width: 100%;
-            height: 180px;
-            object-fit: cover;
-        }
-        
-        .game-info {
-            padding: 1.5rem;
-        }
-        
-        .game-title {
-            font-size: 1.2rem;
-            margin-bottom: 0.5rem;
-            color: var(--light);
-        }
-        
-        .game-description {
-            font-size: 0.9rem;
-            color: rgba(255,255,255,0.7);
-            margin-bottom: 1rem;
-        }
-        
-        .game-link {
-            display: inline-block;
-            color: var(--magenta);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 0.9rem;
-            transition: var(--transition);
-        }
-        
-        .game-link:hover {
-            color: var(--pink);
-            text-decoration: underline;
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MemoDev Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:ital,wght@0,300;0,400;0,500;1,300&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg:           #0c0b0f;
+      --surface:      #110f15;
+      --card:         #16141c;
+      --border:       #2a2630;
+      --accent:       #e86fa0;
+      --accent2:      #c4436e;
+      --accent3:      #9b7fc4;
+      --accent-glow:  rgba(232,111,160,0.18);
+      --text:         #cfc8d8;
+      --text-dim:     #6e667a;
+      --text-bright:  #f0eaf6;
+    }
 
-        /* Suggestion Box Styles */
-        .suggestion-section {
-            background-color: var(--darker);
-            text-align: center;
-        }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
 
-        .suggestion-box {
-            display: flex;
-            flex-direction: column;
-            gap: 15px;
-            margin: 0 auto;
-            max-width: 600px;
-        }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Crimson Pro', Georgia, serif;
+      font-size: 19px;
+      line-height: 1.75;
+      overflow-x: hidden;
+      cursor: none;
+    }
 
-        .suggestion-box textarea {
-            width: 100%;
-            height: 150px;
-            padding: 15px;
-            border: 2px solid rgba(255,255,255,0.1);
-            border-radius: 8px;
-            resize: none;
-            font-size: 16px;
-            transition: var(--transition);
-            background-color: var(--dark);
-            color: var(--light);
-        }
+    /* ── CURSOR ── */
+    .cursor {
+      position: fixed;
+      width: 10px; height: 10px;
+      background: var(--accent);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9999;
+      transform: translate(-50%, -50%);
+      transition: width 0.2s, height 0.2s, background 0.2s;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 36px; height: 36px;
+      border: 1px solid rgba(232,111,160,0.5);
+      border-radius: 50%;
+      pointer-events: none;
+      z-index: 9998;
+      transform: translate(-50%, -50%);
+      transition: transform 0.12s ease-out, width 0.25s, height 0.25s, border-color 0.25s;
+    }
+    body:hover .cursor { opacity: 1; }
 
-        .suggestion-box textarea:focus {
-            outline: none;
-            border-color: var(--magenta);
-            box-shadow: 0 0 8px rgba(255, 0, 255, 0.3);
-        }
+    /* ── NOISE ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 1000;
+      opacity: 0.3;
+    }
 
-        .suggestion-box button {
-            background: linear-gradient(135deg, var(--magenta), var(--pink));
-            color: white;
-            border: none;
-            padding: 12px 24px;
-            border-radius: 8px;
-            cursor: pointer;
-            font-size: 16px;
-            font-weight: bold;
-            transition: var(--transition);
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-        }
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 500;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.4rem max(1.5rem, 6vw);
+      background: linear-gradient(to bottom, rgba(12,11,15,0.95) 0%, transparent 100%);
+      backdrop-filter: blur(8px);
+    }
+    .nav-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.2rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      text-decoration: none;
+      letter-spacing: -0.01em;
+    }
+    .nav-logo span { color: var(--accent); font-style: italic; }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
 
-        .suggestion-box button:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 8px rgba(255, 20, 147, 0.4);
-        }
+    /* ── HERO ── */
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding: 0 max(2rem, 8vw);
+      overflow: hidden;
+    }
 
-        .suggestion-box button:active {
-            transform: translateY(1px);
-        }
+    .hero-bg-grid {
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(rgba(232,111,160,0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,111,160,0.035) 1px, transparent 1px);
+      background-size: 55px 55px;
+      animation: gridDrift 40s linear infinite;
+    }
+    @keyframes gridDrift {
+      from { background-position: 0 0; }
+      to   { background-position: 55px 55px; }
+    }
 
-        .suggestion-box button:disabled {
-            background: #cccccc;
-            cursor: not-allowed;
-            transform: none;
-            box-shadow: none;
-        }
+    .hero-orb {
+      position: absolute;
+      border-radius: 50%;
+      pointer-events: none;
+      filter: blur(80px);
+    }
+    .hero-orb-1 {
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(232,111,160,0.1) 0%, transparent 70%);
+      top: -150px; right: -150px;
+      animation: orbFloat 8s ease-in-out infinite;
+    }
+    .hero-orb-2 {
+      width: 400px; height: 400px;
+      background: radial-gradient(circle, rgba(155,127,196,0.08) 0%, transparent 70%);
+      bottom: 0; left: -100px;
+      animation: orbFloat 11s ease-in-out infinite reverse;
+    }
+    @keyframes orbFloat {
+      0%, 100% { transform: translate(0, 0); }
+      50%       { transform: translate(20px, -30px); }
+    }
 
-        .trash-container {
-            height: 140px;
-            position: relative;
-            margin-bottom: 20px;
-            opacity: 0;
-            transform: translateY(20px);
-            transition: var(--transition);
-        }
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 900px;
+    }
 
-        .trash-container.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .hero-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.7rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1.8rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      opacity: 0;
+      animation: fadeUp 0.8s 0.2s forwards;
+    }
+    .hero-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 32px; height: 1px;
+      background: var(--accent);
+    }
 
-        .trash-bin {
-            position: relative;
-            width: 100px;
-            height: 120px;
-            margin: 0 auto;
-        }
+    .hero-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(4rem, 10vw, 9rem);
+      font-weight: 900;
+      line-height: 0.92;
+      color: var(--text-bright);
+      letter-spacing: -0.025em;
+      margin-bottom: 2rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.35s forwards;
+    }
+    .hero-title .line2 {
+      display: block;
+      color: var(--accent);
+      font-style: italic;
+      -webkit-text-stroke: 0px;
+    }
+    .hero-title .line3 {
+      display: block;
+      font-size: 0.45em;
+      font-weight: 400;
+      font-style: italic;
+      color: var(--text-dim);
+      letter-spacing: 0.01em;
+      margin-top: 0.5rem;
+    }
 
-        .bin-body {
-            width: 100px;
-            height: 80px;
-            background-color: #666;
-            border-radius: 0 0 5px 5px;
-            position: relative;
-            box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-        }
+    .hero-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: clamp(1.1rem, 2vw, 1.35rem);
+      font-weight: 300;
+      color: var(--text);
+      max-width: 560px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.5s forwards;
+    }
+    .hero-desc strong { color: var(--text-bright); font-weight: 600; }
 
-        .bin-lid {
-            width: 110px;
-            height: 15px;
-            background-color: #888;
-            border-radius: 5px 5px 0 0;
-            position: absolute;
-            top: -15px;
-            left: -5px;
-            transition: transform 0.3s;
-            transform-origin: left center;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-        }
+    .hero-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+      margin-bottom: 3rem;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.65s forwards;
+    }
+    .tag {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.1em;
+      padding: 0.35rem 0.9rem;
+      border: 1px solid var(--border);
+      color: var(--text-dim);
+      background: var(--card);
+    }
+    .tag.pink {
+      border-color: rgba(232,111,160,0.4);
+      color: var(--accent);
+      background: rgba(232,111,160,0.06);
+    }
+    .tag.purple {
+      border-color: rgba(155,127,196,0.4);
+      color: var(--accent3);
+      background: rgba(155,127,196,0.06);
+    }
 
-        .bin-lid-open {
-            transform: rotate(-30deg);
-        }
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.9s 0.8s forwards;
+    }
+    .btn {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 0.8rem 1.8rem;
+      text-decoration: none;
+      transition: all 0.25s;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .btn-primary {
+      background: var(--accent);
+      color: #0c0b0f;
+    }
+    .btn-primary:hover { background: var(--accent2); }
+    .btn-ghost {
+      background: transparent;
+      color: var(--accent);
+      border: 1px solid rgba(232,111,160,0.4);
+    }
+    .btn-ghost:hover {
+      background: rgba(232,111,160,0.08);
+      border-color: var(--accent);
+    }
 
-        .particle {
-            position: absolute;
-            color: var(--magenta);
-            pointer-events: none;
-            z-index: 10;
-            transform: translate(-50%, -50%);
-            font-weight: bold;
-            transition: all 0.1s;
-        }
+    .hero-avatar {
+      position: absolute;
+      right: max(3rem, 8vw);
+      top: 50%;
+      transform: translateY(-50%);
+      opacity: 0;
+      animation: fadeIn 1.2s 0.8s forwards;
+    }
+    .hero-avatar img {
+      width: 200px; height: 200px;
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      filter: grayscale(20%) contrast(1.05);
+      display: block;
+    }
+    .hero-avatar-ring {
+      position: absolute;
+      inset: -16px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,111,160,0.25);
+      animation: ringPulse 3s ease-in-out infinite;
+    }
+    .hero-avatar-ring2 {
+      position: absolute;
+      inset: -32px;
+      border-radius: 50%;
+      border: 1px solid rgba(232,111,160,0.1);
+      animation: ringPulse 3s 0.8s ease-in-out infinite;
+    }
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.4; transform: scale(1); }
+      50%       { opacity: 1;   transform: scale(1.03); }
+    }
 
-        .feedback-message {
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-            height: 24px;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: var(--transition);
-        }
+    .hero-quote-float {
+      position: absolute;
+      bottom: 8rem;
+      right: max(3rem, 8vw);
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 0.95rem;
+      color: var(--accent);
+      max-width: 220px;
+      text-align: right;
+      border-right: 2px solid var(--accent);
+      padding-right: 1rem;
+      opacity: 0;
+      animation: fadeIn 1s 1.3s forwards;
+    }
 
-        .feedback-message.visible {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    .scroll-indicator {
+      position: absolute;
+      bottom: 2.5rem;
+      left: max(2rem, 8vw);
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      opacity: 0;
+      animation: fadeIn 1s 1.5s forwards;
+    }
+    .scroll-indicator::after {
+      content: '';
+      display: block;
+      width: 40px; height: 1px;
+      background: linear-gradient(to right, var(--text-dim), transparent);
+      animation: scrollLine 2.5s ease-in-out infinite;
+    }
+    @keyframes scrollLine {
+      0%, 100% { width: 20px; opacity: 0.4; }
+      50%       { width: 50px; opacity: 1; }
+    }
 
-        .success {
-            color: var(--magenta);
-        }
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
 
-        .error {
-            color: #f44336;
-        }
+    /* ── SECTION SHARED ── */
+    .section {
+      padding: 7rem max(2rem, 8vw);
+      position: relative;
+    }
+    .section-inner { max-width: 1100px; margin: 0 auto; }
 
-        .character-count {
-            text-align: right;
-            font-size: 14px;
-            color: rgba(255,255,255,0.7);
-            margin-top: 5px;
-        }
+    .section-header {
+      margin-bottom: 4rem;
+    }
+    .section-eyebrow {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.8rem;
+    }
+    .section-eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 24px; height: 1px;
+      background: var(--accent);
+    }
+    .section-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.2rem, 4.5vw, 3.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      color: var(--text-bright);
+      letter-spacing: -0.015em;
+    }
+    .section-title em { color: var(--accent); font-style: italic; }
+    .section-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      max-width: 500px;
+      margin-top: 1rem;
+    }
 
-        .character-count.warning {
-            color: #ff9800;
-        }
+    /* ── ABOUT ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    .about-text p {
+      color: var(--text);
+      margin-bottom: 1.4rem;
+      font-weight: 300;
+    }
+    .about-text p:last-child { margin-bottom: 0; }
+    .about-text strong { color: var(--text-bright); font-weight: 600; }
 
-        .character-count.error {
-            color: #f44336;
-        }
-        
-        @media (max-width: 768px) {
-            h1 {
-                font-size: 3rem;
-            }
-            
-            h2 {
-                font-size: 2.2rem;
-            }
-            
-            .tagline {
-                font-size: 1.2rem;
-            }
-            
-            nav ul {
-                flex-wrap: wrap;
-                gap: 1rem;
-                justify-content: center;
-            }
-            
-            nav a {
-                padding: 0.5rem 1rem;
-                font-size: 0.8rem;
-            }
-            
-            .projects, .games-container {
-                grid-template-columns: 1fr;
-            }
-            
-            section {
-                padding: 4rem 0;
-            }
-        }
-    </style>
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .stat-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .stat-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+    }
+    .stat-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s;
+    }
+    .stat-card:hover::before { transform: scaleX(1); }
+    .stat-num {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.8rem;
+      font-weight: 900;
+      color: var(--text-bright);
+      line-height: 1;
+      margin-bottom: 0.3rem;
+    }
+    .stat-num span { color: var(--accent); }
+    .stat-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+
+    .skills-row {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.9rem;
+    }
+    .skill-bar-item {}
+    .skill-bar-header {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.4rem;
+    }
+    .skill-bar-name {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      color: var(--text);
+    }
+    .skill-bar-pct {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.68rem;
+      color: var(--accent);
+    }
+    .skill-bar-track {
+      height: 3px;
+      background: var(--border);
+      position: relative;
+      overflow: hidden;
+    }
+    .skill-bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent3));
+      width: 0;
+      transition: width 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+    }
+
+    /* ── DIVIDER ── */
+    .divider {
+      width: 100%;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--border), var(--accent), var(--border), transparent);
+      margin: 0;
+    }
+
+    /* ── WORK SECTIONS ── */
+    .work-section {
+      padding: 6rem max(2rem, 8vw);
+      position: relative;
+    }
+    .work-section:nth-child(even) {
+      background: var(--surface);
+    }
+    .work-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .work-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+      gap: 2rem;
+      flex-wrap: wrap;
+    }
+    .work-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      color: var(--text-bright);
+    }
+    .work-title em { color: var(--accent); font-style: italic; }
+    .work-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text-dim);
+      max-width: 380px;
+      text-align: right;
+    }
+
+    .work-engine-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--accent);
+      border: 1px solid rgba(232,111,160,0.3);
+      background: rgba(232,111,160,0.06);
+      padding: 0.3rem 0.8rem;
+      margin-bottom: 1rem;
+      display: block;
+      width: fit-content;
+    }
+
+    .gallery {
+      display: grid;
+      gap: 1.2rem;
+    }
+    .gallery-4 { grid-template-columns: repeat(4, 1fr); }
+    .gallery-3 { grid-template-columns: repeat(3, 1fr); }
+    .gallery-2 { grid-template-columns: repeat(2, 1fr); }
+
+    .gallery-item {
+      position: relative;
+      overflow: hidden;
+      background: var(--card);
+      border: 1px solid var(--border);
+      aspect-ratio: 16/10;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1), filter 0.3s;
+      filter: saturate(0.85) brightness(0.9);
+      display: block;
+    }
+    .gallery-item:hover img {
+      transform: scale(1.06);
+      filter: saturate(1) brightness(1);
+    }
+    .gallery-item-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(12,11,15,0.7) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.3s;
+      display: flex;
+      align-items: flex-end;
+      padding: 1rem;
+    }
+    .gallery-item:hover .gallery-item-overlay { opacity: 1; }
+    .gallery-item-label {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+    }
+
+    /* ── GAMES CATALOG ── */
+    .games-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 1.2rem;
+      margin-top: 3rem;
+    }
+    .game-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.6rem;
+      position: relative;
+      overflow: hidden;
+      text-decoration: none;
+      display: block;
+      transition: border-color 0.3s, transform 0.3s, background 0.3s;
+    }
+    .game-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-4px);
+      background: #1c1924;
+    }
+    .game-card::after {
+      content: '→';
+      position: absolute;
+      top: 1.4rem; right: 1.4rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.9rem;
+      color: var(--accent);
+      opacity: 0;
+      transition: opacity 0.2s, transform 0.2s;
+      transform: translateX(-4px);
+    }
+    .game-card:hover::after {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .game-card-num {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      color: var(--text-dim);
+      margin-bottom: 0.6rem;
+    }
+    .game-card-name {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text-bright);
+      margin-bottom: 0.4rem;
+    }
+    .game-card-type {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent3);
+      background: rgba(155,127,196,0.1);
+      padding: 0.15rem 0.55rem;
+      display: inline-block;
+      border-radius: 2px;
+    }
+
+    /* ── REVIEWS ── */
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.4rem;
+      margin-top: 3rem;
+    }
+    .review-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      padding: 1.8rem;
+      position: relative;
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+    }
+    .review-card:hover {
+      border-color: rgba(232,111,160,0.4);
+      transform: translateY(-4px);
+    }
+    .review-card::before {
+      content: '\201C';
+      position: absolute;
+      top: -0.5rem;
+      left: 1.2rem;
+      font-family: 'Playfair Display', serif;
+      font-size: 5rem;
+      color: var(--accent);
+      opacity: 0.12;
+      line-height: 1;
+      pointer-events: none;
+    }
+    .review-text {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.05rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--text);
+      line-height: 1.6;
+      position: relative;
+      z-index: 1;
+    }
+    .review-author {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-top: 1rem;
+    }
+
+    /* ── CONTACT ── */
+    .contact-section {
+      padding: 8rem max(2rem, 8vw);
+      background: var(--surface);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .contact-section::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: radial-gradient(ellipse at center, rgba(232,111,160,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .contact-inner { max-width: 700px; margin: 0 auto; position: relative; }
+    .contact-title {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.5rem, 6vw, 5rem);
+      font-weight: 900;
+      line-height: 1.0;
+      color: var(--text-bright);
+      margin-bottom: 1.5rem;
+    }
+    .contact-title em { color: var(--accent); font-style: italic; }
+    .contact-desc {
+      font-family: 'Crimson Pro', serif;
+      font-size: 1.15rem;
+      font-weight: 300;
+      color: var(--text-dim);
+      margin-bottom: 3rem;
+    }
+    .contact-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.2rem;
+      flex-wrap: wrap;
+    }
+
+    .contact-discord {
+      margin-top: 2.5rem;
+      font-family: 'DM Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      color: var(--text-dim);
+    }
+    .contact-discord span {
+      color: var(--accent);
+      background: rgba(232,111,160,0.08);
+      border: 1px solid rgba(232,111,160,0.2);
+      padding: 0.25rem 0.7rem;
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      padding: 2.5rem max(2rem, 8vw);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 1rem;
+      border-top: 1px solid var(--border);
+    }
+    .footer-logo {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.1rem;
+      color: var(--text-dim);
+    }
+    .footer-logo span { color: var(--accent); font-style: italic; }
+    .footer-tagline {
+      font-family: 'DM Mono', monospace;
+      font-size: 0.62rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--text-dim);
+    }
+    .footer-tagline span {
+      color: var(--accent);
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 900px) {
+      .hero-avatar { display: none; }
+      .about-grid { grid-template-columns: 1fr; }
+      .gallery-4 { grid-template-columns: repeat(2, 1fr); }
+      .gallery-3 { grid-template-columns: repeat(2, 1fr); }
+      .work-header { flex-direction: column; }
+      .work-desc { text-align: left; }
+    }
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .gallery-2, .gallery-3, .gallery-4 { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
 </head>
 <body>
-    <header style="background: url('https://raw.githubusercontent.com/MemoD3v/MemoD3v/main/full-resolution-pixelated.png') center/cover no-repeat; color: white; text-align: center; padding: 100px 20px;">
-        <div class="container" style="background-color: rgba(0, 0, 0, 0.15); padding: 20px; border-radius: 10px; display: inline-block;">
-            <img src="https://img.itch.zone/aW1nLzIwMjYyMTUwLnBuZw==/original/ttie5d.png" alt="MemoDev Banner" style="max-width: 100%; height: auto; border-radius: 10px;">
-        </div>
-    </header>
 
-    <nav>
-        <div class="nav-container">
-            <ul>
-                <li><a href="#about">About</a></li>
-                <li><a href="#work">Portfolio</a></li>
-                <li><a href="#games">Games</a></li>
-                <li><a href="#suggestions">Suggestions</a></li>
-                <li><a href="#contact">Connect</a></li>
-            </ul>
-        </div>
-    </nav>
-    
-    <section id="about" class="about">
-        <div class="container">
-            <h2>Creative Developer</h2>
-            <p>I'm MemoDev, a passionate creator specializing in bringing visions to life through technical execution and artistic flair. My work sits at the intersection of functionality and aesthetics.</p>
-            
-            <div class="specialties">
-                <div class="specialty">
-                    <i class="fas fa-lightbulb"></i>
-                    <h3>Brainstorming</h3>
-                    <p>Concept development and creative problem-solving to generate innovative solutions that stand out. I turn coffee into code and ideas into reality.</p>
-                </div>
-                
-                <div class="specialty">
-                    <i class="fas fa-code"></i>
-                    <h3>Scripting</h3>
-                    <p>Clean, efficient code that brings functionality to your projects with precision and reliability. I speak fluent JavaScript, Python, and occasionally sarcasm.</p>
-                </div>
-                
-                <div class="specialty">
-                    <i class="fas fa-camera-retro"></i>
-                    <h3>Vector Art</h3>
-                    <p>a.</p>
-                </div>
-              
-              <div class="specialty">
-                    <i class="fas fa-film"></i>
-                    <h3>VFX</h3>
-                    <p>Stunning visual effects that enhance storytelling and create immersive digital experiences. Because sometimes reality needs a little extra sparkle.</p>
-                </div>
+<!-- Custom cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <a href="#" class="nav-logo">Memo<span>Dev</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#unity">Unity</a></li>
+    <li><a href="#roblox">Roblox</a></li>
+    <li><a href="#blender">Blender</a></li>
+    <li><a href="#games">Games</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section class="hero">
+  <div class="hero-bg-grid"></div>
+  <div class="hero-orb hero-orb-1"></div>
+  <div class="hero-orb hero-orb-2"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Developer · Artist · Designer, Stopwatch Games</div>
+
+    <h1 class="hero-title">
+      Hey, I'm
+      <span class="line2">MemoDev</span>
+      <span class="line3">and I make games & stuff.</span>
+    </h1>
+
+    <p class="hero-desc">
+      I'm <strong>Memo</strong>, a non-binary game dev from Azerbaijan who loves making things that actually feel good to play. I work in Unity, Roblox, Blender, and whatever else gets the job done. Big on <strong>aesthetics</strong>, obsessed with the little details.
+    </p>
+
+    <div class="hero-tags">
+      <span class="tag pink">Game Design</span>
+      <span class="tag pink">Tech Art</span>
+      <span class="tag">Tools &amp; Systems</span>
+      <span class="tag purple">Stylized Visuals</span>
+      <span class="tag">Environmental Engineering</span>
+      <span class="tag">Vector Art</span>
+    </div>
+
+    <div class="hero-cta">
+      <a href="https://memo-dev.itch.io" class="btn btn-primary" target="_blank">View Games ↗</a>
+      <a href="#about" class="btn btn-ghost">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero-avatar">
+    <img src="https://avatars.githubusercontent.com/u/203685542?v=4" alt="MemoDev" />
+    <div class="hero-avatar-ring"></div>
+    <div class="hero-avatar-ring2"></div>
+  </div>
+
+  <div class="hero-quote-float">
+    "I'll do whatever it takes<br>to make something great"
+  </div>
+
+  <div class="scroll-indicator">Scroll to explore</div>
+</section>
+
+<!-- ═══════════════ ABOUT ═══════════════ -->
+<div class="divider"></div>
+<section class="section" id="about">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">About Me</div>
+      <h2 class="section-title">I care about how<br><em>things feel.</em></h2>
+      <p class="section-desc">Good controls, satisfying feedback, readable UI, that's where I start. The polish comes after.</p>
+    </div>
+
+    <div class="about-grid">
+      <div class="about-text">
+        <p>Hey! I'm MemoDev, a game developer, vector artist, and designer from <strong>Azerbaijan</strong> (UTC +04:00). Right now I'm working at <strong>Stopwatch Games Studio</strong> on a horror game called <em>The Keyhole</em>, and building my own thing called <strong>Lightbreak</strong> on the side.</p>
+        <p>I started out just making little experiments and game jam entries, and somehow turned that into shipping games across Unity, Löve2D, Roblox, and the browser. I genuinely failed 8th grade math, which makes it pretty funny that I now spend my days writing game systems for a living.</p>
+        <p>What I really care about is making stuff that <em>feels right</em>. A platformer that's satisfying to move in. A shader that catches your eye. A UI that doesn't get in the way. I'll spend way too long tweaking things most people won't even notice, and I'm totally okay with that.</p>
+        <p>If you want to chat, find me on Discord as <strong style="color: var(--accent)">memorysilver</strong>, my DMs are open.</p>
+
+        <div class="skills-row" style="margin-top: 2.5rem;">
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Unity / C#</span>
+              <span class="skill-bar-pct">90%</span>
             </div>
-            
-            <p class="humor">* May contain traces of messy code. Side effects may include increased creativity, spontaneous idea generation, and the occasional bad pun.</p>
-        </div>
-    </section>
-    
-    <section id="work" class="work">
-        <div class="container">
-            <h2>Featured Projects</h2>
-            <p>Here's some of my recent work that I'm particularly proud of (and that didn't break in export).</p>
-            
-            <div class="projects">
-                <div class="project">
-                    <img src="https://media.discordapp.net/attachments/1361617965694582897/1364728037752573983/image.png?ex=684412c7&is=6842c147&hm=d3eb0dc64505a49d0899ec90731dd0d2158c418f87fde5a6f4f468050852675a&=&format=webp&quality=lossless&width=1558&height=800" alt="Creative Project">
-                    <div class="project-info">
-                        <h3>BLUELOCK Ithoshi Sae Aura</h3>
-                        <p>a vfx demo of a Roblox project</p>
-                        <div class="project-tags">
-                            <span class="tag">VFX</span>
-                            <span class="tag">Roblox</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project">
-                    <img src="https://media.discordapp.net/attachments/1374043017941483730/1380608563868864633/image.png?ex=68447f6c&is=68432dec&hm=be5652b41b612bf8237443dd4777b76e6c40c9d307e9fa2a23820d5809917e87&=&format=webp&quality=lossless&width=688&height=386" alt="VFX Showcase">
-                    <div class="project-info">
-                        <h3>GLSL Effects Demo</h3>
-                        <p>A background shader for my game "Lightbreak". Warning: May cause excessive "ooh" and "aah" reactions.</p>
-                        <div class="project-tags">
-                            <span class="tag">GLSL</span>
-                            <span class="tag">Shader</span>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="project">
-                    <img src="https://media.discordapp.net/attachments/1361617965694582897/1367574559502631034/image.png?ex=6843e1cf&is=6842904f&hm=19b5df2d2bac8c940a03517b1cd851d81ab3e63ed999b80551aba654ad1f65d9&=&format=webp&quality=lossless&width=1629&height=800" alt="Scripting Project">
-                    <div class="project-info">
-                        <h3>Bachira Flow" animation/cutscene</h3>
-                        <p>Smooth cutscene animation and effects.</p>
-                        <div class="project-tags">
-                            <span class="tag">VFX</span>
-                            <span class="tag">Animation</span>
-                            <span class="tag">Scripting</span>
-                            <span class="tag">Roblox Rig</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="project">
-                    <img src="https://media.discordapp.net/attachments/1374043017941483730/1380610084421238845/image.png?ex=684480d6&is=68432f56&hm=63c07fcaac4e481ced2713cfdce3e5b822310eeee594b5f708af4e41e5435bb7&=&format=webp&quality=lossless&width=1153&height=851" alt="Scripting Project">
-                    <div class="project-info">
-                        <h3>Itch.io Custom CSS</h3>
-                        <p>my itch.io profile's custom css, scanlines, bloom and chromatic abberation as a css file.</p>
-                        <div class="project-tags">
-                            <span class="tag">Design</span>
-                            <span class="tag">Scripting</span>
-                        </div>
-                    </div>
-                </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="90"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Lua / Löve2D &amp; Roblox</span>
+              <span class="skill-bar-pct">82%</span>
             </div>
-        </div>
-    </section>
-    
-    <section id="games" class="games">
-        <div class="container">
-            <h2>Game Development</h2>
-            <p>When I'm not doing client work, I create games that are (hopefully) more fun than debugging CSS.</p>
-            
-            <div class="games-container">
-                <div class="game-card">
-                    <img src="https://img.itch.zone/aW1nLzIwMzgyMDIwLnBuZw==/315x250%23c/paeWT1.png" class="game-image" alt="Game Screenshot">
-                    <div class="game-info">
-                        <h3 class="game-title">Knight Spade</h3>
-                        <p class="game-description">A fast-paced roguelike deck builder. Warning: May cause addiction.</p>
-                        <a href="https://memo-dev.itch.io/knight-spade" class="game-link" target="_blank">Play on itch.io →</a>
-                    </div>
-                </div>
-                
-                <div class="game-card">
-                    <img src="https://img.itch.zone/aW1nLzE2NDQ2NDc1LnBuZw==/315x250%23c/mkIuhm.png" class="game-image" alt="Game Screenshot">
-                    <div class="game-info">
-                        <h3 class="game-title">Orbit</h3>
-                        <p class="game-description">A (not so)Calm and cozy space adventure.</p>
-                        <a href="https://memo-dev.itch.io/orbit" class="game-link" target="_blank">Play on itch.io →</a>
-                    </div>
-                </div>
-                
-                <div class="game-card">
-                    <img src="https://img.itch.zone/aW1nLzE2NDQ0MTYxLnBuZw==/315x250%23c/R%2B%2Bcsg.png" class="game-image" alt="Game Screenshot">
-                    <div class="game-info">
-                        <h3 class="game-title">BOARD</h3>
-                        <p class="game-description">Chess. as a pvp?.</p>
-                        <a href="https://memo-dev.itch.io/board" class="game-link" target="_blank">Play on itch.io →</a>
-                    </div>
-                </div>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="82"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Figma / Vector Art</span>
+              <span class="skill-bar-pct">85%</span>
             </div>
-            
-            <div style="text-align: center; margin-top: 3rem;">
-                <a href="https://memo-dev.itch.io" class="btn btn-outline" target="_blank">
-                    <i class="fas fa-gamepad"></i> View All Games
-                </a>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="85"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Blender / 3D</span>
+              <span class="skill-bar-pct">70%</span>
             </div>
-        </div>
-    </section>
-
-    <section id="suggestions" class="suggestion-section">
-        <div class="container">
-            <h2>Got Suggestions?</h2>
-            <p>I'd love to hear your ideas for improvements or new features!</p>
-            
-            <div class="suggestion-box">
-                <textarea id="suggestionText" placeholder="Type your suggestion here..." maxlength="500"></textarea>
-                <div id="characterCount" class="character-count">0/500</div>
-                <button id="submitBtn">Submit Suggestion</button>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="70"></div></div>
+          </div>
+          <div class="skill-bar-item">
+            <div class="skill-bar-header">
+              <span class="skill-bar-name">Game Design</span>
+              <span class="skill-bar-pct">88%</span>
             </div>
-            
-            <div class="trash-container" id="trashContainer">
-                <div class="trash-bin">
-                    <div class="bin-lid" id="binLid"></div>
-                    <div class="bin-body"></div>
-                </div>
-            </div>
-            
-            <div class="feedback-message" id="feedbackMessage"></div>
-            
-            <p class="humor">Note: Suggestions are stored in a magical database that may or may not exist.</p>
+            <div class="skill-bar-track"><div class="skill-bar-fill" data-width="88"></div></div>
+          </div>
         </div>
-    </section>
-    
-    <section id="contact" class="contact">
-        <div class="container">
-            <h2>Let's Create Together</h2>
-            <p>Have a project in mind or want to discuss potential collaborations?</p>
-            <p>I'm always up for a creative challenge (and the occasional meme exchange).</p>
-            
-            <a href="https://discord.com/" class="btn" target="_blank">
-                <i class="fab fa-discord"></i> memorysilver
-            </a>
-            
-            <p class="humor" style="margin-top: 3rem;">Disclaimer: I respond faster than most APIs, but slightly slower than a cached response.</p>
+      </div>
+
+      <div>
+        <div class="about-stats">
+          <div class="stat-card">
+            <div class="stat-num">17<span>+</span></div>
+            <div class="stat-label">Games Shipped</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">3<span>+</span></div>
+            <div class="stat-label">Years Active</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num"><span style="font-size:1.6rem">∞</span></div>
+            <div class="stat-label">Jam Entries</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-num">1<span>★</span></div>
+            <div class="stat-label">Steam Game Upcoming</div>
+          </div>
         </div>
-    </section>
-    
-    <footer>
-        <div class="container">
-            <div class="social-links">
-                <a href="https://github.com/MemoD3v" target="_blank" title="GitHub"><i class="fab fa-github"></i></a>
-                <a href="https://memo-dev.itch.io" target="_blank" title="itch.io"><i class="fas fa-gamepad"></i></a>
-            </div>
-            <p>Special thanks to the guy who came with me to my finals for making my career possible.</p>
+
+        <div style="margin-top: 1.5rem; padding: 1.8rem; background: var(--card); border: 1px solid var(--border); border-left: 3px solid var(--accent);">
+          <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); margin-bottom: 0.8rem;">Currently</div>
+          <p style="font-family: 'Crimson Pro', serif; font-size: 1rem; color: var(--text); margin: 0;">
+            🔭 Working on <strong style="color:var(--text-bright)">Lightbreak</strong><br>
+            🌱 Learning Lua Löve2D &amp; C# Unity<br>
+            🏢 At <strong style="color:var(--text-bright)">Stopwatch Games</strong>, building <em>The Keyhole</em>
+          </p>
         </div>
-    </footer>
+      </div>
+    </div>
+  </div>
+</section>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            const textarea = document.getElementById('suggestionText');
-            const submitBtn = document.getElementById('submitBtn');
-            const binLid = document.getElementById('binLid');
-            const trashContainer = document.getElementById('trashContainer');
-            const feedbackMessage = document.getElementById('feedbackMessage');
-            const characterCount = document.getElementById('characterCount');
+<!-- ═══════════════ UNITY ═══════════════ -->
+<div class="divider"></div>
+<section class="work-section" id="unity">
+  <div class="work-inner">
+    <div class="work-header">
+      <div>
+        <div class="work-engine-badge">⚙ Unity</div>
+        <h2 class="work-title">Making things<br><em>feel good first.</em></h2>
+      </div>
+      <p class="work-desc">I start with the controller, get the movement feeling right, then layer on the juice: particles, screenshake, sounds, UI polish. In that order, always.</p>
+    </div>
 
-            // Character count feedback
-            textarea.addEventListener('input', function() {
-                const count = textarea.value.length;
-                characterCount.textContent = `${count}/500`;
-                if (count > 400) {
-                    characterCount.className = 'character-count warning';
-                } else if (count >= 500) {
-                    characterCount.className = 'character-count error';
-                } else {
-                    characterCount.className = 'character-count';
-                }
-            });
+    <div class="gallery gallery-4">
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/unity/c6c559d8-f7c0-4241-973a-460bbee712c4.png" alt="Unity project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Unity Project</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/unity/9051b5b3-27c1-448a-8625-b5da1c219c05.png" alt="Unity project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Unity Project</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/unity/f11ca741-6c0d-4ce8-87bc-4fbbff3e02ca.png" alt="Unity project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Unity Project</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/unity/b72a8587-0400-44ea-8b57-ee8d8b0d5438.png" alt="Unity project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Unity Project</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            submitBtn.addEventListener('click', function() {
-                const text = textarea.value.trim();
-                if (!text) {
-                    showFeedback('Please enter your suggestion before submitting.', 'error');
-                    textarea.focus();
-                    return;
-                }
-                if (text.length > 500) {
-                    showFeedback('Please keep suggestions under 500 characters.', 'error');
-                    return;
-                }
-                submitBtn.disabled = true;
-                showTrashBin();
-                dissolveText(text);
-                textarea.value = '';
-                characterCount.textContent = '0/500';
-                characterCount.className = 'character-count';
-            });
+<!-- ═══════════════ ROBLOX ═══════════════ -->
+<div class="divider"></div>
+<section class="work-section" id="roblox">
+  <div class="work-inner">
+    <div class="work-header">
+      <div>
+        <div class="work-engine-badge">🎮 Roblox / Luau</div>
+        <h2 class="work-title">Systems that hold up<br><em>when things get chaotic.</em></h2>
+      </div>
+      <p class="work-desc">Rapid Luau prototyping: abilities, match flow, cinematic moments. Modules that stay clean, and UIs that actually feel alive to interact with.</p>
+    </div>
 
-            function showTrashBin() {
-                trashContainer.classList.add('visible');
-            }
+    <div class="gallery gallery-3">
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/roblox/37463d26-d1cd-4727-b226-2a7c730b3770.png" alt="Roblox project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Roblox Project</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/roblox/c1f278d1-3f41-43a2-8451-b4272ff578a1.png" alt="Roblox project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Roblox Project</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/roblox/a895bbde-f195-4f44-a386-224e3482e725.png" alt="Roblox project" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Roblox Project</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-            function showFeedback(message, type) {
-                feedbackMessage.textContent = message;
-                feedbackMessage.className = `feedback-message ${type} visible`;
-                setTimeout(() => {
-                    feedbackMessage.classList.remove('visible');
-                }, 3000);
-            }
+<!-- ═══════════════ BLENDER ═══════════════ -->
+<div class="divider"></div>
+<section class="work-section" id="blender">
+  <div class="work-inner">
+    <div class="work-header">
+      <div>
+        <div class="work-engine-badge">🫐 Blender</div>
+        <h2 class="work-title">Soft shapes,<br><em>clean silhouettes.</em></h2>
+      </div>
+      <p class="work-desc">Low-poly props, stylized characters, and models that are actually easy to work with in-engine. Cute stuff that doesn't break your polycount.</p>
+    </div>
 
-            function dissolveText(text) {
-                // Open the trash bin lid
-                binLid.classList.add('bin-lid-open');
+    <div class="gallery gallery-3">
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/blender/cec6a5e7-7595-4b9a-9248-0b9c039fa9de.png" alt="Blender work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Blender Work</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/blender/0fab50df-91c4-4704-ab8d-44d82c671723.png" alt="Blender work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Blender Work</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/blender/5696181e-1f91-4088-a959-de81d1ba179d.png" alt="Blender work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Blender Work</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                // Create particles for each character
-                const textLength = text.length;
-                let particlesCompleted = 0;
+<!-- ═══════════════ OTHER ═══════════════ -->
+<div class="divider"></div>
+<section class="work-section">
+  <div class="work-inner">
+    <div class="work-header">
+      <div>
+        <div class="work-engine-badge">✦ Other Work</div>
+        <h2 class="work-title">Random experiments<br><em>&amp; extra stuff.</em></h2>
+      </div>
+      <p class="work-desc">Steam pages, cover art, shaders, and random things that didn't fit neatly into any one tool. A little peek at the weirder corners of what I make.</p>
+    </div>
 
-                for (let i = 0; i < textLength; i++) {
-                    setTimeout(() => {
-                        const particle = document.createElement('div');
-                        particle.className = 'particle';
-                        particle.textContent = text[i];
-                        particle.style.fontSize = `${14 + Math.random() * 6}px`;
+    <div class="gallery gallery-3">
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/other/bd8616e6-88c9-4699-9dd6-bfd945e67a6e.png" alt="Other work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Experimental</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/other/277fb021-f391-462b-90aa-0c5fd79d2c60.png" alt="Other work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Cover Art</span></div>
+      </div>
+      <div class="gallery-item">
+        <img src="https://memodevportfolio.netlify.app/assets/other/image_2025-11-09_014426242.jpg" alt="Other work" onerror="this.style.display='none'; this.parentElement.style.background='#1c1924';" />
+        <div class="gallery-item-overlay"><span class="gallery-item-label">Extra Art</span></div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                        // Random color variation
-                        const hue = 300 + Math.random() * 60; // Magenta/pink hues
-                        particle.style.color = `hsl(${hue}, 70%, 70%)`;
+<!-- ═══════════════ GAMES CATALOG ═══════════════ -->
+<div class="divider"></div>
+<section class="section" id="games">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">itch.io Catalog</div>
+      <h2 class="section-title">Games I've<br><em>actually shipped.</em></h2>
+      <p class="section-desc">17+ browser-playable games across all kinds of genres, each one something I learned from, broke, fixed, and eventually let go of.</p>
+    </div>
 
-                        // Position at random location in textarea
-                        const textareaRect = textarea.getBoundingClientRect();
-                        const x = textareaRect.left + Math.random() * textareaRect.width;
-                        const y = textareaRect.top + Math.random() * textareaRect.height;
-                        particle.style.left = x + 'px';
-                        particle.style.top = y + 'px';
-                        document.body.appendChild(particle);
+    <div class="games-grid">
+      <a href="https://memo-dev.itch.io/redhanded" class="game-card" target="_blank">
+        <div class="game-card-num">01</div>
+        <div class="game-card-name">RedHanded</div>
+        <span class="game-card-type">Featured</span>
+      </a>
+      <a href="https://memo-dev.itch.io/knight-spade" class="game-card" target="_blank">
+        <div class="game-card-num">02</div>
+        <div class="game-card-name">Knight Spade</div>
+        <span class="game-card-type">Card Game</span>
+      </a>
+      <a href="https://memo-dev.itch.io/tower-climb" class="game-card" target="_blank">
+        <div class="game-card-num">03</div>
+        <div class="game-card-name">Tower Climb</div>
+        <span class="game-card-type">Platformer</span>
+      </a>
+      <a href="https://memo-dev.itch.io/cake-gone-bad" class="game-card" target="_blank">
+        <div class="game-card-num">04</div>
+        <div class="game-card-name">Cake Gone Bad</div>
+        <span class="game-card-type">Browser</span>
+      </a>
+      <a href="https://memo-dev.itch.io/mines" class="game-card" target="_blank">
+        <div class="game-card-num">05</div>
+        <div class="game-card-name">MINES</div>
+        <span class="game-card-type">Puzzle</span>
+      </a>
+      <a href="https://memo-dev.itch.io/the-button" class="game-card" target="_blank">
+        <div class="game-card-num">06</div>
+        <div class="game-card-name">The Button</div>
+        <span class="game-card-type">Experimental</span>
+      </a>
+      <a href="https://memo-dev.itch.io/is-this-puzzle-worth-solving" class="game-card" target="_blank">
+        <div class="game-card-num">07</div>
+        <div class="game-card-name">Is This Puzzle Worth Solving?</div>
+        <span class="game-card-type">Puzzle</span>
+      </a>
+      <a href="https://memo-dev.itch.io/cozy-caf" class="game-card" target="_blank">
+        <div class="game-card-num">08</div>
+        <div class="game-card-name">Cozy Café</div>
+        <span class="game-card-type">Casual</span>
+      </a>
+      <a href="https://memo-dev.itch.io/cloud-dino-battle" class="game-card" target="_blank">
+        <div class="game-card-num">09</div>
+        <div class="game-card-name">Cloud Dino Battle</div>
+        <span class="game-card-type">Action</span>
+      </a>
+      <a href="https://memo-dev.itch.io/revange-of-yemrec" class="game-card" target="_blank">
+        <div class="game-card-num">10</div>
+        <div class="game-card-name">Revange of YEMREC</div>
+        <span class="game-card-type">Action</span>
+      </a>
+      <a href="https://memo-dev.itch.io/nature" class="game-card" target="_blank">
+        <div class="game-card-num">11</div>
+        <div class="game-card-name">Nature</div>
+        <span class="game-card-type">Experimental</span>
+      </a>
+      <a href="https://memo-dev.itch.io/calculus" class="game-card" target="_blank">
+        <div class="game-card-num">12</div>
+        <div class="game-card-name">CALCULUS</div>
+        <span class="game-card-type">Browser</span>
+      </a>
+      <a href="https://memo-dev.itch.io/game-idea-generator" class="game-card" target="_blank">
+        <div class="game-card-num">13</div>
+        <div class="game-card-name">Game Idea Generator</div>
+        <span class="game-card-type">Tool</span>
+      </a>
+      <a href="https://memo-dev.itch.io/evil-one" class="game-card" target="_blank">
+        <div class="game-card-num">14</div>
+        <div class="game-card-name">[Gandi IDE] Evil One</div>
+        <span class="game-card-type">Action</span>
+      </a>
+      <a href="https://memo-dev.itch.io/minecraft-clicker-2" class="game-card" target="_blank">
+        <div class="game-card-num">15</div>
+        <div class="game-card-name">Minecraft Clicker 2</div>
+        <span class="game-card-type">Clicker</span>
+      </a>
+      <a href="https://memo-dev.itch.io/minecraft-clicker" class="game-card" target="_blank">
+        <div class="game-card-num">16</div>
+        <div class="game-card-name">Minecraft Clicker</div>
+        <span class="game-card-type">Clicker</span>
+      </a>
+      <a href="https://memo-dev.itch.io/board" class="game-card" target="_blank">
+        <div class="game-card-num">17</div>
+        <div class="game-card-name">BOARD</div>
+        <span class="game-card-type">Puzzle</span>
+      </a>
+    </div>
+  </div>
+</section>
 
-                        // Animate to trash bin
-                        const binRect = binLid.getBoundingClientRect();
-                        const targetX = binRect.left + binRect.width/2;
-                        const targetY = binRect.top + binRect.height/2;
-                        const duration = 600 + Math.random() * 600;
-                        const startTime = Date.now();
+<!-- ═══════════════ REVIEWS ═══════════════ -->
+<div class="divider"></div>
+<section class="section" id="reviews">
+  <div class="section-inner">
+    <div class="section-header">
+      <div class="section-eyebrow">Customer Reviews</div>
+      <h2 class="section-title">What people<br><em>actually said.</em></h2>
+      <p class="section-desc">Real feedback from real clients, in their own words.</p>
+    </div>
 
-                        function animate() {
-                            const elapsed = Date.now() - startTime;
-                            const progress = Math.min(elapsed / duration, 1);
+    <div class="reviews-grid">
+      <div class="review-card">
+        <p class="review-text">"communication was okay and i liked the end product but the service was rather slow."</p>
+        <div class="review-author">Client</div>
+      </div>
 
-                            // Arc motion with slight variation
-                            const arcHeight = 80 + Math.random() * 60;
-                            const arcVariation = Math.sin(progress * Math.PI * 2) * 30;
-                            const newX = x + (targetX - x) * progress + arcVariation;
-                            const newY = y + (targetY - y) * progress - arcHeight * Math.sin(progress * Math.PI);
+      <div class="review-card">
+        <p class="review-text">"LOVE IT! RECOMMEND IT!"</p>
+        <div class="review-author">Client</div>
+      </div>
 
-                            particle.style.left = newX + 'px';
-                            particle.style.top = newY + 'px';
+      <div class="review-card">
+        <p class="review-text">"pretty good results"</p>
+        <div class="review-author">Client</div>
+      </div>
 
-                            // Rotation effect
-                            particle.style.transform = `translate(-50%, -50%) rotate(${progress * 720}deg) scale(${1.2 - progress * 0.7})`;
+      <div class="review-card">
+        <p class="review-text">"Worth the money."</p>
+        <div class="review-author">Client</div>
+      </div>
 
-                            // Fade out
-                            particle.style.opacity = 1 - progress * 0.9;
+      <div class="review-card">
+        <p class="review-text">"He literally made the game just like how i imagined it omg"</p>
+        <div class="review-author">Client</div>
+      </div>
 
-                            if (progress < 1) {
-                                requestAnimationFrame(animate);
-                            } else {
-                                particle.remove();
-                                particlesCompleted++;
+      <div class="review-card">
+        <p class="review-text">"they've explained everything in simple language that a non game developer can understand tho it was kinda slow"</p>
+        <div class="review-author">Client</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-                                // When all particles are done
-                                if (particlesCompleted === textLength) {
-                                    completeAnimation();
-                                }
-                            }
-                        }
+<!-- ═══════════════ CONTACT ═══════════════ -->
+<div class="divider"></div>
+<section class="contact-section" id="contact">
+  <div class="contact-inner">
+    <div class="section-eyebrow" style="justify-content:center; margin-bottom:1.5rem;">Get In Touch</div>
+    <h2 class="contact-title">Got something<br><em>cool in mind?</em></h2>
+    <p class="contact-desc">I'm open to collabs, commissions, and interesting projects. Hit me up on Discord anytime.</p>
 
-                        requestAnimationFrame(animate);
-                    }, i * 30); // Stagger the particles
-                }
+    <div class="contact-links">
+      <a href="https://memo-dev.itch.io" class="btn btn-primary" target="_blank">itch.io ↗</a>
+      <a href="https://github.com/MemoD3v" class="btn btn-ghost" target="_blank">GitHub ↗</a>
+      <a href="https://www.stopwatchgames.com/about" class="btn btn-ghost" target="_blank">Stopwatch Games ↗</a>
+      <a href="https://store.steampowered.com/app/4120770/The_Keyhole/" class="btn btn-ghost" target="_blank">The Keyhole on Steam ↗</a>
+    </div>
 
-                function completeAnimation() {
-                    showFeedback('Thank you for your suggestion!', 'success');
+    <div class="contact-discord">
+      Discord: <span>memorysilver</span>
+    </div>
 
-                    // Close the lid after a delay
-                    setTimeout(() => {
-                        binLid.classList.remove('bin-lid-open');
+    <div style="margin-top: 3rem; padding: 2rem; background: var(--card); border: 1px solid var(--border); border-top: 3px solid var(--accent);">
+      <div style="font-family: 'Playfair Display', serif; font-size: 1.3rem; font-style: italic; color: var(--text-bright); margin-bottom: 0.5rem;">"I'll do whatever it takes to make something great."</div>
+      <div style="font-family: 'DM Mono', monospace; font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent);">MemoDev</div>
+    </div>
+  </div>
+</section>
 
-                        // Hide the bin after animation completes
-                        setTimeout(() => {
-                            trashContainer.classList.remove('visible');
-                            submitBtn.disabled = false;
-                        }, 1000);
-                    }, 500);
-                }
-            }
-        });
-    </script>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-logo">Memo<span>Dev</span></div>
+  <div class="footer-tagline">Stopwatch Games Studio · <span>UTC +04:00</span> · Azerbaijan</div>
+</footer>
+
+<script>
+  // Custom cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.left = mx + 'px';
+    cursor.style.top = my + 'px';
+  });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button').forEach(el => {
+    el.addEventListener('mouseenter', () => {
+      cursor.style.width = '18px';
+      cursor.style.height = '18px';
+      ring.style.width = '52px';
+      ring.style.height = '52px';
+      ring.style.borderColor = 'rgba(232,111,160,0.8)';
+    });
+    el.addEventListener('mouseleave', () => {
+      cursor.style.width = '10px';
+      cursor.style.height = '10px';
+      ring.style.width = '36px';
+      ring.style.height = '36px';
+      ring.style.borderColor = 'rgba(232,111,160,0.5)';
+    });
+  });
+
+  // Skill bars animate on scroll
+  const bars = document.querySelectorAll('.skill-bar-fill');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        const w = e.target.dataset.width;
+        e.target.style.width = w + '%';
+      }
+    });
+  }, { threshold: 0.3 });
+  bars.forEach(b => observer.observe(b));
+
+  // Fade-in sections on scroll
+  const sections = document.querySelectorAll('.work-section, .section, .contact-section');
+  const sectionObserver = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+      }
+    });
+  }, { threshold: 0.08 });
+  sections.forEach(s => {
+    s.style.opacity = '0';
+    s.style.transform = 'translateY(30px)';
+    s.style.transition = 'opacity 0.8s ease, transform 0.8s ease';
+    sectionObserver.observe(s);
+  });
+</script>
 </body>
 </html>
